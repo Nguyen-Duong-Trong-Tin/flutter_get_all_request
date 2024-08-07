@@ -1,25 +1,25 @@
 import 'dart:convert';
 
-List<Post> postFromJson(String str) =>
-    List<Post>.from(json.decode(str).map((item) => Post.fromJson(item)));
+List<PostModel> postFromJson(String str) => List<PostModel>.from(
+    json.decode(str).map((item) => PostModel.fromJson(item)));
 
-String postToJson(List<Post> data) =>
+String postToJson(List<PostModel> data) =>
     json.encode(List<dynamic>.from(data.map((item) => item.toJson())));
 
-class Post {
-  Post({
+class PostModel {
+  final int userId;
+  final int id;
+  final String title;
+  String? body;
+
+  PostModel({
     required this.userId,
     required this.id,
     required this.title,
     this.body,
   });
 
-  final int userId;
-  final int id;
-  final String title;
-  String? body;
-
-  factory Post.fromJson(Map<String, dynamic> json) => Post(
+  factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
         userId: json["userId"],
         id: json["id"],
         title: json["title"],
